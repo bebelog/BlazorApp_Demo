@@ -1,0 +1,37 @@
+﻿@page "/dynamic"
+@rendermode InteractiveServer
+
+<PageTitle>Dynamic Content</PageTitle>
+
+<h3>Our First Dynamic Content</h3>
+
+<br />
+<div class="mb-3">
+    <button class="btn btn-primary me-2" @onclick="HandleBlazerServerClick">Blazor Server</button>
+    <button class="btn btn-secondary" @onclick="HandleBlazerWebAssemblyClick">Blazor WebAssembly</button>
+</div>
+
+@if (!string.IsNullOrEmpty(title))
+{
+    <div class="card p-3 mt-3">
+        <h4>@title</h4>
+        <p>@content</p>
+    </div>
+}
+
+@code {
+    private string? title;
+    private string? content;
+
+    private void HandleBlazerServerClick()
+    {
+        title = "Blazor Server";
+        content = "Blazor Server sẽ khởi tạo những nội dung động (dynamic content) ở máy chủ (server) và gửi nội dung tới trình duyệt thông qua giao thức SignalR.";
+    }
+
+    private void HandleBlazerWebAssemblyClick()
+    {
+        title = "Blazor WebAssembly";
+        content = "Blazor WebAssembly chạy hoàn toàn ở trình duyệt và khởi tạo những nội dung động ngay tại trình duyệt.";
+    }
+}

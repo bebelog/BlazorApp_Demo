@@ -1,0 +1,44 @@
+﻿@page "/products"
+@rendermode InteractiveServer
+@inject ISearchProduct searchProduct
+
+<div class="neon-page-header">
+    <h1 class="neon-title">cấu trúc dữ liệu</h1>
+    <p class="neon-subtitle">Discover premium beauty products with radiant formulas</p>
+</div>
+
+<SearchBarComponent OnSearch="HandleSearch"></SearchBarComponent>
+
+@if (products != null && products.Any())
+{
+    <div class="row g-4 mb-5">
+        @foreach (var prod in products)
+        {
+            <ProductItemComponent Product="prod"></ProductItemComponent>
+        }
+    </div>
+}
+else
+{
+    <div class="neon-empty-state">
+        <div class="neon-empty-icon">💄</div>
+        <h4>Cannot find products</h4>
+        <p>Try searching for another keyword like "Maybelline", "Blush", "Bronzer" or "Foundation".</p>
+    </div>
+}
+
+@code {
+    private IEnumerable<Product> products;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        products = searchProduct.Execute();
+    }
+
+    private void HandleSearch(string filter)
+    {
+        products = searchProduct.Execute(filter);
+    }
+}
