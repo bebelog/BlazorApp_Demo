@@ -1,13 +1,9 @@
-﻿<div class="neon-search-container">
-    <div class="neon-search-box">
-        <span class="neon-search-icon">🔍</span>
-        <input type="text" 
-               class="neon-search-input" 
-               id="filter" 
-               placeholder="Search products by name (e.g. Maybelline, Bronzer, Blush, Foundation)..." 
-               @bind-value="filter" 
-               @onkeyup="@(e => { if (e.Key == "Enter") HandleSearch(); })" />
-        <button type="button" class="neon-search-btn" @onclick="HandleSearch">Search</button>
+<div class="mb-3 row">
+    <div class="col-auto">
+        <input type="text" class="form-control" @bind-value="filter" placeholder="Search product..." />
+    </div>
+    <div class="col-auto">
+        <button type="button" class="btn btn-primary" @onclick="HandleSearch">Search</button>
     </div>
 </div>
 
@@ -17,7 +13,8 @@
     [Parameter]
     public EventCallback<string> OnSearch { get; set; }
 
-    private void HandleSearch() {
+    private void HandleSearch()
+    {
         OnSearch.InvokeAsync(filter);
     }
 }

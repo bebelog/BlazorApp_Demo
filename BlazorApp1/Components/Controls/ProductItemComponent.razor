@@ -1,24 +1,14 @@
-﻿@if (this.Product != null)
+@if (this.Product != null)
 {
-    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-        <div class="neon-card">
-            <div class="neon-card-img-wrap">
-                <img src="@Product.ImageLink" alt="@Product.Name" class="neon-card-img" loading="lazy" />
-                <span class="neon-brand-badge">@Product.Brand</span>
-            </div>
-            <div class="neon-card-body">
-                <h5 class="neon-product-name" title="@Product.Name">@Product.Name</h5>
-                <div class="neon-card-footer">
-                    <div class="neon-price-tag">
-                        <span class="neon-currency">$</span>@Product.Price.ToString("F2")
-                    </div>
-                    <NavLink href="@($"product/{Product.Id}")" class="neon-detail-btn">
-                        View Details →
-                    </NavLink>
-                </div>
-            </div>
-        </div>
-    </div>
+    <tr>
+        <td>
+            <NavLink href="@($"/product/{Product.Id}")">
+                @Product.Name
+            </NavLink>
+        </td>
+        <td>@Product.Brand</td>
+        <td>@Product.Price.ToString("c")</td>
+    </tr>
 }
 
 @code {

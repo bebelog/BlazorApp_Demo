@@ -1,45 +1,22 @@
-﻿@page "/product/{id:int}"
+@page "/product/{id:int}"
 @rendermode InteractiveServer
 @inject IViewProduct viewProduct
 
-<div class="neon-details-container py-4">
-    @if (product != null)
-    {
-        <div class="neon-details-wrapper">
-            <div class="row align-items-center g-4 p-4">
-                <div class="col-lg-5 col-md-6">
-                    <div class="neon-details-img-box">
-                        <img src="@product.ImageLink" alt="@product.Name" class="neon-details-img" />
-                    </div>
-                </div>
-                <div class="col-lg-7 col-md-6">
-                    <div class="neon-details-info-box">
-                        <span class="neon-details-brand">@product.Brand</span>
-                        <h1 class="neon-details-title">@product.Name</h1>
-                        <div class="neon-details-price">
-                            <span class="neon-currency">$</span>@product.Price.ToString("F2")
-                        </div>
-                        <p class="neon-details-desc">
-                            @product.Description
-                        </p>
-                        <div class="mt-3">
-                            <NavLink href="products" class="neon-search-btn text-decoration-none d-inline-block">
-                                ← Back to Product Page
-                            </NavLink>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<h3>Product Details</h3>
+
+@if (product != null)
+{
+    <div class="card" style="width: 22rem;">
+        <img src="@product.ImageLink" class="card-img-top" alt="@product.Name" />
+        <div class="card-body">
+            <h5 class="card-title">@product.Name</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Brand: @product.Brand</h6>
+            <h5 class="text-danger">@product.Price.ToString("c")</h5>
+            <p class="card-text">@product.Description</p>
+            <NavLink href="products" class="btn btn-primary">Back to Product Page</NavLink>
         </div>
-    }
-    else
-    {
-        <div class="neon-empty-state">
-            <div class="neon-empty-icon">⏳</div>
-            <h4>Loading product details...</h4>
-        </div>
-    }
-</div>
+    </div>
+}
 
 @code {
     private Product product;
